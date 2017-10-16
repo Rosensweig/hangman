@@ -12,7 +12,10 @@ const uuid = require('uuid/v1');
 
 // set up our express application
 app.use(morgan('dev')); // log every request to the console
-app.use(bodyParser()); // get information from html forms
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 app.use(session({
 	genid: function(req) {
