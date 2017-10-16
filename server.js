@@ -9,7 +9,6 @@ var morgan       = require('morgan');
 var bodyParser   = require('body-parser');
 var session      = require('express-session');
 const uuid = require('uuid/v1');
-const path = require('path');
 
 
 // set up our express application
@@ -18,8 +17,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(bodyParser.json());
-
-app.use(express.static(path.resolve(__dirname, '..', 'build')));
 
 
 app.use(session({

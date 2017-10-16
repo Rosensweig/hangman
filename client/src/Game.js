@@ -32,7 +32,7 @@ class Game extends Component {
 
     return (
       <div className="Game">
-        <p><button onClick={() => this.startGame()}>{this.state.guessesLeft<0?"Click to Start":"Restart Game?"}</button>&nbsp;<input className={inputClasses} maxLength="1" size="4" /></p>
+        <p><button onClick={() => this.startGame()}>{this.state.guessesLeft<0?"Click to Start":"Restart Game?"}</button>&nbsp;<input id="mobileInput" className={inputClasses} maxLength="1" size="4" /></p>
         <h2>{typeToGuess}</h2>
         <Status 
         	guessesLeft={this.state.guessesLeft} 
@@ -47,8 +47,10 @@ class Game extends Component {
   }
 
   startGame() {
-  	if (this.state.guessesLeft > 0 && !(this.state.finished)&& !(window.confirm("Are you sure you want to start over?")) ) {
-  		return;
+  	if (this.state.guessesLeft > 0 && !(this.state.finished) ) {
+  		if ( !(window.confirm("Are you sure you want to start over?")) ) {
+  			return;
+  		}
   	}
   	fetch('newGame', {
 		  credentials: 'include',
@@ -60,7 +62,6 @@ class Game extends Component {
 		).then( (response) => {
 		  if (response.ok) {
 		    response.json().then(json => {
-		      console.log(json);
 		      this.setState({
 		      	placeholders: json.placeholders,
 		      	lettersGuessed: json.lettersGuessed,
@@ -73,18 +74,19 @@ class Game extends Component {
 	}
 
 	guess(event) {
+		document.getElementById('mobileInput').value="";
 		if (event.keyCode === 13) {
 			this.startGame();
+			return;
 		}
-		console.log("event: ", event);
 		if (64<event.keyCode && event.keyCode<91) {
-			if ( (this.state.finished || this.state.guessesLeft === 0) && window.confirm("Start a new game?") ) {
-				this.startGame();
+			if ( this.state.finished || (this.state.guessesLeft === 0) ) {
+				if (window.confirm("Start a new game?")) {
+					this.startGame();
+				}
 				return;
 			}
 			var letter = String.fromCharCode(event.keyCode).toLowerCase();
-			console.log("charCode: ", event.keyCode);
-			console.log("letter: ", letter);
 			if ( !(this.state.lettersGuessed.indexOf(letter)===-1) ) {
 				this.setState({
 					alreadyGuessed:letter
@@ -100,7 +102,6 @@ class Game extends Component {
 			}).then( (response) => {
 				if (response.ok) {
 					response.json().then( json => {
-						console.log(json);
 						this.setState({
 			      	placeholders: json.placeholders,
 			      	lettersGuessed: json.lettersGuessed,
