@@ -1,12 +1,21 @@
 const requireText = require('require-text');
 var dictionary = requireText('../extras/dictionary.txt', require);
 dictionary = dictionary.split('\r\n');
+const path = require('path');
+const express  = require('express');
+
 
 var games = {};
 
 
 module.exports = function(app) {
-	
+
+	app.use(express.static(path.resolve(__dirname, '..', 'client/build')));
+
+	app.get('/', (req, res) => {
+	  res.sendFile(path.resolve(__dirname, '..', 'client/build', 'index.html'));
+	});
+
 	app.get('/newGame', function(req, res) {
 		var word = dictionary[Math.floor(Math.random()*dictionary.length)];
 		word = word.split('');
