@@ -9,7 +9,8 @@
     "server": "nodemon server.js",
     "client": "npm run start --prefix client",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
-    "test-client": "npm test --prefix client"
+    "test-client": "npm test --prefix client",
+    "test": "mocha"
   },
   "author": "Daniel Rosensweig",
   "license": "ISC",
@@ -22,5 +23,10 @@
     "path": "^0.12.7",
     "require-text": "0.0.1",
     "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^4.0.1"
   }
 }

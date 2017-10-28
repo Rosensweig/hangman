@@ -16,3 +16,12 @@
 * To start the server, run `npm start`
   + View the project from a web browser, at [localhost:8080](http://localhost:8080)
 * To stop your server when done, hit `ctrl-c` from the same command line window.
+
+
+## Testing instructions
+
+* To test server:
+	+ From the command line, in the project's home directory, run `npm test`.
+* To test client:
+	+ From the command line, in the project's home directory, run `npm run test-client`.
+	+ If you see only one test, hit `a` to run the rest of them.

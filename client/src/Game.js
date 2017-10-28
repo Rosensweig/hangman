@@ -154,7 +154,7 @@ class Game extends Component {
 			}
 			fetch('/guess/'+letter, {	// call server with user's guess (which we know is a letter, and not a repeat)
 				credentials: 'include',	// include session info
-				method: 'GET',	// we want to get data
+				method: 'POST',	// we want to post data
 				headers: {
 					Accept: 'application/json'	// we expect data to come back as JSON
 				}

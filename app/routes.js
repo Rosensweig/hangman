@@ -57,7 +57,7 @@ module.exports = function(app) {
 	}); // ends newGame
 
 	// handles each letter the user guesses, updates server records, and returns necessary JSON data for front-end use
-	app.get('/guess/:letter', function(req, res) {
+	app.post('/guess/:letter', function(req, res) {
 		var game = games[req.sessionID]; // retrieve the current game
 		if (!game) {
 			res.redirect('/newGame'); // if we didn't find a current game, start a new one
