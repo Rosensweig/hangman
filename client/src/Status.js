@@ -36,10 +36,10 @@ class Status extends Component {
     // Note that commenting syntax is different inside JSX
     return (
       <div className="Status">
-        <h2 className={color}>{guesses}</h2> {/* Tells user how many guesses they left, or if they won/lost. Red if lost, green if won. */}
-        <h3>You've won {this.props.won} games, and lost {this.props.lost} games.</h3> {/* Tell how many games they won/lost */}
-        <h3>Guessed so far: {this.props.lettersGuessed}</h3> {/* Tells user which letters they've already guessed */}
-        <h3>{repeated}</h3> {/* If user is making a repeat guess, tell them that, and which letter */}
+        <h2 id="guesses" className={color}>{guesses}</h2> {/* Tells user how many guesses they left, or if they won/lost. Red if lost, green if won. */}
+        <h3 id="wonLost">You've won {this.props.won} games, and lost {this.props.lost} games.</h3> {/* Tell how many games they won/lost */}
+        <h3 id="lettersGuessed">Guessed so far: {this.props.lettersGuessed}</h3> {/* Tells user which letters they've already guessed */}
+        <h3 id="repeated">{repeated}</h3> {/* If user is making a repeat guess, tell them that, and which letter */}
         {this.wordLink(this.props.finished||(this.props.guessesLeft === 0), this.props.placeholders)} {/* Check whether game is over, pass to wordLink for display and possible linkage (see comments on function below) */}
       </div>
     );
@@ -59,7 +59,7 @@ class Status extends Component {
 
      if (finished) {  // if we're finished, we'll need the dictionary link
       return (
-        <h2>
+        <h2 id="placeholders">
           <a href={link} target="_blank"> {/* Link to look up word in dictionary, in new tab */}
             {word}  {/* Show the word */}
           </a>
@@ -67,7 +67,7 @@ class Status extends Component {
       );
     } else {  // game isn't done yet, so we don't need the dictionary link
       return (
-        <h2>
+        <h2 id="placeholders">
           {word}  {/* Show the word */}
         </h2>
       );

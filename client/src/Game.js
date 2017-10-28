@@ -122,6 +122,8 @@ class Game extends Component {
 		      	placeholders: json.placeholders,	// partial word, to be filled in through server response
 		      	lettersGuessed: json.lettersGuessed,	// list of letters guessed so far
 		      	guessesLeft: json.guessesLeft,	// how many guesses remaining?
+		      	won: json.won,
+		      	lost: json.lost,
 		      	finished: false	// it's a brand new game, so we know they haven't won yet
 		      });
 		    });
